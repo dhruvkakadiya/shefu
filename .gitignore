@@ -1,6 +1,12 @@
 # Prerequisites
 *.d
 
+# Compiled folders
+build
+
+# Cached folders
+.DS_Store
+
 # Compiled Object files
 *.slo
 *.lo
