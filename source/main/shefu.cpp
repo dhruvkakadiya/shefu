@@ -1,14 +1,39 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
+sf::Vector2f viewSize(1500, 1024);
+sf::VideoMode vm(viewSize.x, viewSize.y);
+sf::RenderWindow window(vm, "Hello Game SFML !!!", sf::Style::Default);
+
+sf::Texture skyTexture;
+sf::Sprite skySprite;
+
+sf::Texture heroTexture;
+sf::Sprite heroSprite;
+
+void init() {
+  skyTexture.loadFromFile("images/sky1.jpg");
+  skySprite.setTexture(skyTexture);
+
+  heroTexture.loadFromFile("images/hero1.png");
+  heroSprite.setTexture(heroTexture);
+  heroSprite.setPosition(sf::Vector2f(viewSize.x / 2, viewSize.y / 2));
+  heroSprite.setOrigin(heroTexture.getSize().x / 2,
+                       heroTexture.getSize().y / 2);
+}
+
+void draw() {
+  window.draw(skySprite);
+  window.draw(heroSprite);
+}
+
 int main() {
   sf::Music music;
   if (music.openFromFile("music/Super Mario medley.wav")) {
     music.play();
   }
-  sf::RenderWindow window(sf::VideoMode(1200, 1200), "SFML works!");
-  sf::CircleShape shape(600.f);
-  shape.setFillColor(sf::Color::Green);
+
+  init();
 
   while (window.isOpen()) {
     sf::Event event;
@@ -17,7 +42,7 @@ int main() {
     }
 
     window.clear();
-    window.draw(shape);
+    draw();
     window.display();
   }
 
